@@ -54,7 +54,7 @@ resource "fastly_service_vcl" "frontend-vcl-service" {
   }
 
   snippet {
-    name    = "Pageview Counter Increment Counter and Check Rate"
+    name    = "Univision Login Rate Limiting"
     content = "${file("${path.module}/vcl/increment_counter.vcl")}"
     type    = "recv"
     priority = 52
@@ -67,10 +67,24 @@ resource "fastly_service_vcl" "frontend-vcl-service" {
     priority = 100
   }
 
+  snippet {
+    name    = "Ratecounter Error"
+    content = "${file("${path.module}/vcl/ratecounter_error.vcl")}"
+    type    = "error"
+    priority = 100
+  }
+
+  snippet {
+    name    = "Do Not Cache Login"
+    content = "${file("${path.module}/vcl/cache_controls.vcl")}"
+    type    = "fetch"
+    priority = 100
+  }
+
   # Edge Rate Limiting Snippets - End
 
   dictionary {
-    name    = "ip_pageview_limits_10s"
+    name    = "ratelimit_external_login"
   }
 
   logging_bigquery {

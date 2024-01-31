@@ -10,11 +10,11 @@
     "fastly_server": "%{json.escape(server.identity)}V", 
     "fastly_is_edge": %{if(fastly.ff.visits_this_service == 0, "true", "false")}V, 
     "edge_rate_limited": %{if(req.http.Fastly-SEC-RateLimit == "true", "true", "false")}V, 
-    "pageview_count_10s": %{ratecounter.rc.bucket.10s}V, 
-    "pageview_count_20s": %{ratecounter.rc.bucket.20s}V, 
-    "pageview_count_30s": %{ratecounter.rc.bucket.30s}V, 
-    "pageview_count_40s": %{ratecounter.rc.bucket.40s}V, 
-    "pageview_count_50s": %{ratecounter.rc.bucket.50s}V, 
-    "pageview_count_60s": %{ratecounter.rc.bucket.60s}V, 
+    "pageview_count_10s": %{ratecounter.rc_external_logins.bucket.10s}V, 
+    "pageview_count_20s": %{ratecounter.rc_external_logins.bucket.20s}V, 
+    "pageview_count_30s": %{ratecounter.rc_external_logins.bucket.30s}V, 
+    "pageview_count_40s": %{ratecounter.rc_external_logins.bucket.40s}V, 
+    "pageview_count_50s": %{ratecounter.rc_external_logins.bucket.50s}V, 
+    "pageview_count_60s": %{ratecounter.rc_external_logins.bucket.60s}V, 
     "fastly_vcl_version": %{req.vcl.version}V
 }
