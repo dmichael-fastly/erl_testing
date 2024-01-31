@@ -9,7 +9,7 @@
     "response_reason": %{if(resp.response, "%22"+json.escape(resp.response)+"%22", "null")}V, 
     "fastly_server": "%{json.escape(server.identity)}V", 
     "fastly_is_edge": %{if(fastly.ff.visits_this_service == 0, "true", "false")}V, 
-    "edge_rate_limited": %{if(req.http.Fastly-SEC-RateLimit == "true", "true", "false")}V, 
+    "edge_rate_limited": %{if(resp.status == 429, "true", "false")}V, 
     "pageview_count_10s": %{ratecounter.rc_external_logins.bucket.10s}V, 
     "pageview_count_20s": %{ratecounter.rc_external_logins.bucket.20s}V, 
     "pageview_count_30s": %{ratecounter.rc_external_logins.bucket.30s}V, 
