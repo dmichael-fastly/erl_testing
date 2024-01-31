@@ -73,6 +73,10 @@ resource "fastly_service_vcl" "frontend-vcl-service" {
     name    = "ip_pageview_limits_10s"
   }
 
+  dictionary {
+    name    = "ratelimit_external_login"
+  }
+
   logging_bigquery {
     dataset = "dmichael_fastly_logs"
     name = "BigQuery"
